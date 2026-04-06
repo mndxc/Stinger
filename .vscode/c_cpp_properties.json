@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "ESP-IDF",
+            "compilerPath": "/Users/jonathanpool/.espressif/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/xtensa-esp32s3-elf-gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "includePath": [
+                "${workspaceFolder}/firmware/**",
+                "/Users/jonathanpool/esp/v5.3/esp-idf/components/**"
+            ],
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/firmware",
+                    "/Users/jonathanpool/esp/v5.3/esp-idf/components"
+                ],
+                "limitSymbolsToIncludedHeaders": false
+            },
+            "compileCommands": "${workspaceFolder}/firmware/build/compile_commands.json",
+            "intelliSenseMode": "macos-gcc-arm64"
+
+        }
+
+    ],
+    "version": 4
+}

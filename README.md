@@ -9,10 +9,10 @@ To initialize your development environment and build the firmware, follow the st
 
 ## 🛠️ Project Structure
 
-- `firmware/` — ESP-IDF v5.3 source code.
+- `firmware/` — ESP-IDF v6.0 source code.
     - `main/pin_map.h`: Hardware Rev V37 GPIO assignments.
     - `main/board_config.h`: Master constants (Audio/USB/Display).
-- `hardware/` — KiCad 8.0 design files (Brain and Plate boards).
+- `hardware/` — KiCad (latest release) design files (Brain and Plate boards).
 - `tools/` — Helper scripts for WAV preparation and flashing.
 - `assets/` — Bitmap fonts and sample audio banks.
 
