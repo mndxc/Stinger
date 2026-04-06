@@ -46,8 +46,8 @@ Use the following strict indicators to denote the state of an item:
 - [ ] Integrate ES8388 Audio Codec Driver (Local Component)
 - [ ] Initialize SPI3 Bus for Display Comm
 - [ ] Integrate Waveshare 2.9" E-paper Display Driver
-- [ ] Initialize FreeRTOS `InputScanTask` (Core 0, Priority 20) for 4x4 Matrix
-- [ ] Integrate Rotary Encoders (Interrupt-driven updates)
+- [x] Initialize FreeRTOS `InputScanTask` (Core 0, Priority 20) for 4x4 Matrix
+- [x] Integrate Rotary Encoders (Interrupt-driven updates)
 
 ### Phase 2: Core Subsystem Services (Layer 2)
 - [ ] Initialize `SdManagerTask` (Core 1, Priority 15)
