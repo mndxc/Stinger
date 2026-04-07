@@ -1,7 +1,48 @@
-# ESP-IDF build artifacts
+# ESP-IDF
 build/
 sdkconfig.old
 sdkconfig.defaults.old
+node_modules/
 
-# macOS system files
+# KiCad Project Artifacts
+*.000
+*.bak
+*.bck
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*-backups
+*-cache
+*-bak
+*-bak*
+*~
+~*
+_autosave-*
+fp-info-cache
+*.kicad_prl
+
+# Generated Hardware Outputs (BOM/Gerbers/PDFs) 
+# User will manually add these when stable
+*.csv
+*.xml
+*.pdf
+*.gbr
+*.drl
+*.gbl
+*.gbs
+*.gbo
+*.gto
+*.gts
+*.gtl
+*.gm1
+*.gm2
+*.pos
+*.rpt
+
+# IDE and Extensions
+.vscode/
+.history/
+.ipynb_checkpoints/
+
+# macOS / System
 .DS_Store
+Thumbs.db

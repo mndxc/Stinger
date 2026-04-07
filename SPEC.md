@@ -20,9 +20,9 @@ The specification has been cleanly divided into hardware and firmware domains fo
 
 The Stinger uses a modular Two-Board Hinge design to optimize signal integrity and mechanical stability.
 
-- **Brain PCB (Base):** Houses the ESP32-S3, ES8388 Codec, MicroSD slot, Power Section, and Rear I/O.
-- **Plate PCB (Interface):** Houses the 16-button matrix and the 2.9" E-paper display.
-- **Interconnect:** Two standard 10-pin IDC ribbon cables (2.54mm pitch) connect the boards.
+- **Brain PCB (Base):** Houses the ESP32-S3, ES8388 Codec, MicroSD slot, Power Section, and Rear I/O. Uses **Professional SMT** for fine-pitch ICs and **Manual THT** for IDC interconnects.
+- **Plate PCB (Interface):** Houses the 25-button matrix and the 2.9" E-paper display. Fully **Hand-Soldered**.
+- **Interconnect:** Two standard 14-pin IDC ribbon cables (2.54mm pitch) connect the boards via THT shrouded headers.
 
 ---
 

@@ -41,9 +41,16 @@ Use the following strict indicators to denote the state of an item:
 
 ## Task Backlog (Logical Steps to Completion)
 
+### Phase 0: Hardware Design Freeze (CRITICAL)
+- [-] **Schematic & Pin Audit**: Review `master_pins.json` against ESP32-S3 strapping requirements.
+  - > Update (2026-04-06): Hardware checklist created. Focus on GPIO 0 (MCLK) and GPIO 3 (Matrix) conflicts.
+- [ ] **BOM Verification**: Confirm ES8388, E-paper, and SD card components meet electrical specs.
+- [ ] **Circuit Protection**: Confirm anti-ghosting diodes and I2C pull-ups are in the layout.
+
 ### Phase 1: Hardware Abstraction & Drivers (Layer 1)
-- [ ] Initialize I2C Bus for Codec Communication
-- [ ] Integrate ES8388 Audio Codec Driver (Local Component)
+- [x] Initialize I2C Bus for Codec Communication
+- [x] Integrate ES8388 Audio Codec Driver (Local Component)
+  - > Update (2026-04-06): I2C Master initialized and ES8388 driver implemented. Verified via successful build and component registration.
 - [ ] Initialize SPI3 Bus for Display Comm
 - [ ] Integrate Waveshare 2.9" E-paper Display Driver
 - [x] Initialize FreeRTOS `InputScanTask` (Core 0, Priority 20) for 4x4 Matrix

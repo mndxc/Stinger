@@ -1,6 +1,6 @@
 idf_component_register(SRCS "main.c" "stinger_app.c"
                     INCLUDE_DIRS "."
-                    REQUIRES input_handler)
+                    REQUIRES input_handler es8388)
 
 # Automatically generate pin_map.h from master_pins.json
 add_custom_command(

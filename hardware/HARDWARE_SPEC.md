@@ -1,149 +1,102 @@
 # Stinger: Hardware Specification
+**Revision 1.9 — Hybrid Assembly Model**
 
-> This document outlines the physical architecture, component selection, schematics logic, and printed circuit board (PCB) details of the Stinger. For the master pin mapping, refer to the root `SPEC.md`.
-
-## 1. Hardware Specification
-
-### 1.1 MCU Module
-
-- **Model:** ESP32-S3-WROOM-1-N8R8 (Octal SPI).
-- **Forbidden Pins:** GPIO 33–37 (internal PSRAM/Flash).
-- **Strapping:** GPIO 0 HIGH (10kΩ); GPIO 45 (VDD_SPI) LOW for 3.3V flash operation. GPIO 1 is a ROM-printing bootstrapping pin (keep trace short, ensure high-impedance at boot). Matrix Col 1 moved to GPIO 15 to avoid GPIO 3 bootstrapping conflicts.
-
-### 1.2 Audio Subsystem
-
-- **Codec:** ES8388 (QFN-28, 4×4mm) by Everest Semiconductor. Actively manufactured.
-- **Configuration:** 48kHz / 16-bit PCM, I2S slave mode.
-- **I2C Address:** 0x10 (CE pin LOW) or 0x11 (CE pin HIGH). CE pin state must be defined in schematic and matched in `board_config.h`.
-- **Output:** Board-mount 3.5mm TRRS jack (CTIA) on the front panel.
-- **Power Pins:**
-
-| ES8388 Supply Pin | Connected Rail | Notes |
-|---|---|---|
-| DVDD | 3.3V_D | Digital core supply. |
-| AVDD | 3.3V_A | ADC/DAC analog supply. Isolated via ferrite bead + 10µF cap. |
-| PVDD | 3.3V_D | PLL supply. Shares with DVDD. |
-| HPVDD | 3.3V_D | Headphone amp supply. Decouple with 10µF + 100nF locally. |
-
-### 1.3 TRRS Signal Path
-
-| TRRS Pin (CTIA) | Signal | ES8388 Connection |
-|---|---|---|
-| Tip | Left Audio Out | LOUT1 via 1µF DC blocking cap, then PRTR5V0U2X TVS to GND |
-| Ring 1 | Right Audio Out | ROUT1 via 1µF DC blocking cap, then PRTR5V0U2X TVS to GND |
-| Ring 2 | Microphone In | LIN1 via 2.2kΩ bias resistor from MICBIAS, then PRTR5V0U2X TVS to GND |
-| Sleeve | Ground | AGND |
-
-> **TVS placement:** PRTR5V0U2X devices placed between TRRS jack pins and DC blocking caps / bias resistors. One package covers two channels — use two packages for all three active lines. Fourth channel is spare.
+> [!IMPORTANT]
+> **Navigation & Source of Truth**  
+> *   **Pin Mapping:** Refer to the root [SPEC.md](file:///Users/jonathanpool/Projects/Stinger/SPEC.md) (Source of Truth).
+> *   **Detailed Design Notes:** Refer to [KICAD_DESIGN_NOTES.md](file:///Users/jonathanpool/Projects/Stinger/hardware/KICAD_DESIGN_NOTES.md) for layout rules.
+> *   **BOM & Sourcing:** The table in **Section 5** of *this document* is the absolute Source of Truth for parts.
 
 ---
 
-## 2. Protection & Glue Circuitry
+## 1. Assembly Strategy
 
-### 2.1 USB Protection
+The Stinger uses a **Hybrid Assembly Model** to balance complexity and ease of construction:
 
-- **VBUS PTC Fuse:** MF-MSMF050-2 (500mA hold, 1A trip, 1812) in series with VBUS before any other circuitry.
-- **USB ESD:** USBLC6-2SC6 (SOT-23-6) placed immediately after USB-C connector pins, before PTC fuse. Rated 8kV contact discharge per IEC 61000-4-2.
+| Board | Assembly Method | Description |
+|---|---|---|
+| **Brain PCB** | **Mixed Mode** | **Professional SMT** for fine-pitch ICs/passives. **Manual THT** for IDC headers. |
+| **Plate PCB** | **Hand-Soldered** | Contains buttons, diodes, and through-hole headers. Uses larger pads (0805 or THT) for manual assembly. |
 
-### 2.2 TRRS Protection
+---
 
-- **TVS:** PRTR5V0U2X,215 (SOT-143, dual-channel). Two packages. Placed between jack pins and signal conditioning.
+## 2. Hardware Specification
 
-### 2.3 Matrix & Encoder Protection
+### 2.1 MCU Module
+- **Model:** ESP32-S3-WROOM-1-N8R8.
+- **Strapping:** GPIO 0 HIGH (10kΩ); GPIO 45 LOW (10kΩ).
 
-- **Series Resistors:** 100Ω (0402) on every matrix Row and Column GPIO line (10 lines total).
-- **Encoder Phase Lines:** 100Ω series resistors on all four encoder phase GPIOs (47, 14, 22, 23).
+### 2.2 Audio Subsystem
+- **Codec:** ES8388 (QFN-28). 48kHz / 16-bit PCM.
+- **I2C Address:** 0x10 (CE pin LOW).
 
-### 2.4 Programming & Reset Logic
+### 2.3 TRRS signal Path
+- **Protection:** PRTR5V0U2X TVS devices on all active lines. 1µF DC-blocking caps on L/R outputs.
 
-- **Auto-Reset Circuit:** Dual NPN transistors (S8050) on RTS/DTR for automatic bootloader entry.
-- **EN (Reset) Pin:** 10kΩ pull-up to 3.3V + 100nF cap to GND.
-- **Boot Pin (GPIO 0):** 10kΩ pull-up to 3.3V + tactile button for manual Download Mode.
-- **EN Button:** Tactile button for manual hardware reset.
+### 2.4 Matrix & Input Protection
+- **Series Resistors:** **100Ω (0402)** on all matrix lines and encoder phases. **Located on Brain PCB** for professional placement.
+- **Ghosting Protection:** **25× 1N4148 diodes** (SOD-123 or THT). **Located on Plate PCB** at each switch node.
+- **Orientation:** Cathode to Matrix Row (for active-low scan).
 
-### 2.5 Power & Status
+### 2.5 E-Paper Display Module
+- **Model:** 2.9" E-Paper Module (e.g., Waveshare).
+- **Interconnect:** **8-pin through-hole header (2.54mm)** on Plate PCB. Hand-wired to the display module.
 
-- **Power Indicator:** Red LED on 3.3V rail via 1kΩ resistor.
-- **Activity Indicator:** RGB LED on GPIO 48.
-- **Ferrite Bead:** BLM18 series 0402 between 3.3V_D and 3.3V_A. 10µF + 100nF decoupling on 3.3V_A.
-
-### 2.6 SD Card Detect
-
-- MicroSD slot card-detect switch pin wired to GPIO 26.
-- Firmware monitors via interrupt. Falling edge (removal) triggers clean unmount. Rising edge (insertion) triggers re-mount and Bank 01 reload.
+### 2.6 SD Card & Power
+- **SD Slot:** Includes card-detect switch on GPIO 26.
+- **Auto-Reset:** Dual S8050 NPN circuit for RTS/DTR.
 
 ---
 
 ## 3. Board Layout Strategy
 
-- **Zone A (Rear):** USB-C connector, USBLC6-2SC6, PTC fuse, Power Switch, LDO.
-- **Zone B (Center):** ESP32-S3, IDC headers for ribbon cables (Two 14-pin 2×7 headers).
-- **Zone C (Front):** ES8388 Codec, TRRS jack, PRTR5V0U2X TVS devices.
-
-> **ESD placement rule:** USBLC6-2SC6 within 5mm of USB-C pins, before PTC fuse. PRTR5V0U2X between TRRS jack pads and first passive on each signal line.
+- **Brain (SMT Zone):** Concentrated fine-pitch routing for audio/USB. IDC headers are THT and should be soldered manually after SMT assembly to save on fixture fees.
+- **Plate (Manual Zone):** Spacious layout for MX-style keys, 0805 resistors (if any), and easily accessible THT pads for the display module and IDC headers.
 
 ---
 
-## 4. Signal Integrity & Safety
+## 4. Maintenance & Change Management
 
-- **Analog Ground Island:** ES8388 AVDD and AGND on isolated copper island. Star-ground via 0Ω resistor near LDO.
-- **Encoder Interrupts:** Dedicated GPIOs with 100Ω series resistors. Not matrix-scanned.
-- **Ribbon Isolation:** SHIFT_KEY (Header B, Pin 9) kept distant from SPI_CLK (Header B, Pin 4).
-- **Boot Window:** GPIO 1 tri-stated during power-on strapping window. Matrix Col 1 moved to GPIO 15 (non-strapping) to eliminate boot interference.
-- **MCLK Boot Safety:** GPIO 0 MCLK output enabled only after ES8388 I2C init completes.
-- **Debug:** All logs via USB CDC. UART0 unavailable in production.
+To keep the hardware and software in sync, follow these rules for every change:
+1.  **Pins:** Update `firmware/stinger/master_pins.json` first. Run `idf.py build` to propagate changes to `SPEC.md`.
+2.  **BOM:** Update Section 5 of this document.
+3.  **Footprints:** If switching from SMD to THT on the Plate, update the KiCad project and this spec simultaneously.
 
 ---
 
-## 5. Bill of Materials (Consolidated)
+## 5. Bill of Materials (Master Source of Truth)
 
-### 5.1 Primary ICs
+### 5.1 Brain PCB — Professional SMT Items (LCSC)
 
-| Component | Part | LCSC | Notes |
+| Component | Part / Value | LCSC | Note |
 |---|---|---|---|
-| MCU Module | ESP32-S3-WROOM-1-N8R8 | C2913148 | |
-| Audio Codec | ES8388 | C365736 | QFN-28, 4×4mm |
-| LDO Regulator | SGM2019-3.3 | C16193 | 3.3V, 300mA |
+| MCU | ESP32-S3-WROOM-1-N8R8 | C2913148 | |
+| Audio Codec | ES8388 | C365736 | QFN-28 |
+| LDO | SGM2019-3.3 | C16193 | 3.3V, 300mA |
+| USB ESD | USBLC6-2SC6 | C7519 | Within 5mm of USB-C |
+| TRRS TVS | PRTR5V0U2X,215 | C12333 | Qty: 2 |
+| PTC Fuse | MF-MSMF050-2 | C17313 | 1812 package |
+| USB-C | RA Top-Mount | C165948 | |
+| MicroSD | With Card Detect | C91145 | |
+| Series Resists | 100Ω (0402) | | Qty: 14 |
+| Passives | 100nF, 1uF, 10uF | | Refer to KiCad Project |
 
-### 5.2 Protection
+### 5.2 Brain PCB — Hand-Soldered / User-Side Items
+*These items are through-hole and should be installed manually to avoid JLCPCB's THT assembly and fixture surcharges.*
 
-| Component | Part | LCSC | Notes |
+| Component | Part / Value | LCSC | Note |
 |---|---|---|---|
-| USB ESD | USBLC6-2SC6 | C7519 | SOT-23-6. ST. Within 5mm of USB-C pins. |
-| TRRS TVS | PRTR5V0U2X,215 | C12333 | SOT-143, dual-channel. Nexperia. Qty: 2. |
-| VBUS PTC Fuse | MF-MSMF050-2 | C17313 | 500mA hold / 1A trip. 1812. |
+| IDC Headers | 2×7 Box Header | C2922129 | 2.54mm THT. Placed on top side. |
 
-### 5.3 Passives (Consolidated)
+### 5.3 Plate PCB — Hand-Soldered / Manual Items
+*This entire board is intended for manual assembly.*
 
-| Value | Package | Role |
-|---|---|---|
-| 100nF | 0402 | Bypass / decoupling on all IC supply pins. |
-| 1µF | 0402 | DC blocking on TRRS audio lines. |
-| 10µF | 0805 | Bulk decoupling: 3.3V_A, HPVDD, LDO output. |
-| 100Ω | 0402 | Series ESD protection: matrix rows, cols, encoder phases. |
-| 1kΩ | 0402 | Power LED current limit. |
-| 2.2kΩ | 0402 | MICBIAS to TRRS Ring 2. |
-| 4.7kΩ | 0402 | I2C SDA/SCL pull-ups. |
-| 10kΩ | 0402 | GPIO pull-ups: EN, Boot, strapping. |
-
-### 5.4 Miscellaneous
-
-| Component | Notes |
-|---|---|
-| USB-C Connector | Mid-mount or right-angle top-mount (e.g. LCSC C165948). |
-| MicroSD Slot | Must include card-detect switch pin. Wire CD to GPIO 26. |
-| TRRS Jack | PJ-320A or equivalent. 3.5mm board-mount. CTIA. |
-| Tactile Buttons ×2 | EN reset + Boot mode. Standard 6×6mm. |
-| Ferrite Bead | BLM18 series 0402. 3.3V_D → 3.3V_A isolation. |
-| NPN Transistors ×2 | S8050. Auto-reset RTS/DTR circuit. |
-| Red LED | Power indicator on 3.3V rail. |
-| RGB LED | Activity/status on GPIO 48. **Located on Plate PCB.** |
-
-### 5.5 Board-to-Board Interconnect
-
-| Component | Spec | Qty | Notes |
+| Component | Part / Value | Sourcing | Note |
 |---|---|---|---|
-| IDC Box Header (PCB) | 2×7, 2.54mm pitch, shrouded, THT | 4 | 2 per board (Brain + Plate). |
-| IDC Crimp Socket (Cable) | 2×7, 2.54mm pitch, female | 4 | 2 per cable. |
-| Flat Ribbon Cable | 14-conductor, 28AWG | 2 | 1.27mm wire pitch. |
+| Keys | MX-Style or Tactile | Generic | 25 required |
+| Diodes | 1N4148W (SOD-123) | C1661 | or THT 1N4148 (C467) |
+| IDC Headers | 2×7 Box Header | C2922129 | 2.54mm THT. Placed on bottom side. |
+| E-Paper | 2.9" Module | Waveshare | With 8-pin breakout |
+| Status LED | WS2812B (5050) | C114586 | 1 required |
+| Ribbon Cable | 14-pin IDC Assembly | Generic | Qty: 2 |
 

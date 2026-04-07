@@ -3,6 +3,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "input_handler.h"
+#include "es8388.h"
 
 static QueueHandle_t s_app_queue = NULL;
 
@@ -31,6 +32,9 @@ static void stinger_app_task(void *pvParameters) {
 void stinger_app_init(void) {
     printf("Initializing Stinger App Layer...\n");
     
+    // Core Layer 1 Subsystems
+    es8388_init();
+
     s_app_queue = xQueueCreate(20, sizeof(input_event_t));
     if (s_app_queue) {
         input_handler_init(s_app_queue);
