@@ -11,7 +11,7 @@
   <img src="https://img.shields.io/badge/Platform-ESP32--S3-orange?style=for-the-badge&logo=espressif" alt="ESP32-S3" />
   <img src="https://img.shields.io/badge/Framework-IDF_v6.0-blue?style=for-the-badge" alt="ESP-IDF v6.0" />
   <img src="https://img.shields.io/badge/Hardware-Rev_V37-green?style=for-the-badge" alt="Hardware Rev V37" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License MIT" />
+  <img src="https://img.shields.io/badge/License-GPL_v3-blue?style=for-the-badge" alt="License GPL v3" />
 </p>
 
 ---
@@ -88,6 +88,6 @@ Stinger/
 
 ## 📜 License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the GNU General Public License v3.0. See `LICENSE` for more information.
 
 **Project Lead:** [JP+](https://github.com/jonathanpool) | **Version:** 1.9 (Architectural Alignment)
