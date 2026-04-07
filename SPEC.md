@@ -67,10 +67,12 @@ To prevent "split-brain" discrepancies between PCB schematics and firmware const
 | `PIN_MATRIX_ROW_1` | GPIO 2 | Matrix Row 1 |
 | `PIN_MATRIX_ROW_2` | GPIO 42 | Matrix Row 2 |
 | `PIN_MATRIX_ROW_3` | GPIO 43 | Matrix Row 3 |
+| `PIN_MATRIX_ROW_4` | GPIO 25 | Matrix Row 4 |
 | `PIN_MATRIX_COL_0` | GPIO 8 | Matrix Col 0 |
-| `PIN_MATRIX_COL_1` | GPIO 3 | Matrix Col 1 |
+| `PIN_MATRIX_COL_1` | GPIO 15 | Matrix Col 1 (moved from GPIO 3 strapping pin) |
 | `PIN_MATRIX_COL_2` | GPIO 44 | Matrix Col 2 |
 | `PIN_MATRIX_COL_3` | GPIO 9 | Matrix Col 3 |
+| `PIN_MATRIX_COL_4` | GPIO 24 | Matrix Col 4 |
 | `PIN_ENC1_A` | GPIO 47 | Encoder 1 A (Bank switching) |
 | `PIN_ENC1_B` | GPIO 14 | Encoder 1 B (Bank switching) |
 | `PIN_ENC2_A` | GPIO 22 | Encoder 2 A (SD Gain) |
@@ -79,14 +81,15 @@ To prevent "split-brain" discrepancies between PCB schematics and firmware const
 | `PIN_STATUS_LED` | GPIO 48 | Status RGB LED |
 <!-- PINS_END -->
 
-### 3.2 Logical Matrix Map (4×4)
+### 3.2 Logical Matrix Map (5×5)
 
-| Row \ Col       | Col 0 (GPIO 8) | Col 1 (GPIO 3) | Col 2 (GPIO 44) | Col 3 (GPIO 9) |
-|-----------------|----------------|----------------|-----------------|----------------|
-| Row 0 (GPIO 1)  | Trigger L1     | Trigger L2     | Trigger L3      | Trigger L4     |
-| Row 1 (GPIO 2)  | Trigger R1     | Trigger R2     | Trigger R3      | Trigger R4     |
-| Row 2 (GPIO 42) | Fav 1          | Fav 2          | Fav 3           | Fav 4          |
-| Row 3 (GPIO 43) | Fav 5          | Shift Key      | Enc 1 Switch    | Enc 2 Switch   |
+| Row \ Col       | Col 0 (GPIO 8) | Col 1 (GPIO 15) | Col 2 (GPIO 44) | Col 3 (GPIO 9) | Col 4 (GPIO 24) |
+|-----------------|----------------|-----------------|-----------------|----------------|-----------------|
+| Row 0 (GPIO 1)  | Trigger L1     | Trigger L2      | Trigger L3      | Trigger L4     | Reserved        |
+| Row 1 (GPIO 2)  | Trigger R1     | Trigger R2      | Trigger R3      | Trigger R4     | Reserved        |
+| Row 2 (GPIO 42) | Fav 1          | Fav 2           | Fav 3           | Fav 4          | Reserved        |
+| Row 3 (GPIO 43) | Fav 5          | Shift Key       | Enc 1 Switch    | Enc 2 Switch   | Reserved        |
+| Row 4 (GPIO 25) | Reserved       | Reserved        | Reserved        | Reserved       | Reserved        |
 
 ---
 

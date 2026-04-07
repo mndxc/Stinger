@@ -8,7 +8,7 @@
 
 - **Model:** ESP32-S3-WROOM-1-N8R8 (Octal SPI).
 - **Forbidden Pins:** GPIO 33–37 (internal PSRAM/Flash).
-- **Strapping:** GPIO 0 HIGH (10kΩ); GPIO 45 (VDD_SPI) LOW for 3.3V flash operation.
+- **Strapping:** GPIO 0 HIGH (10kΩ); GPIO 45 (VDD_SPI) LOW for 3.3V flash operation. GPIO 1 is a ROM-printing bootstrapping pin (keep trace short, ensure high-impedance at boot). Matrix Col 1 moved to GPIO 15 to avoid GPIO 3 bootstrapping conflicts.
 
 ### 1.2 Audio Subsystem
 
@@ -51,7 +51,7 @@
 
 ### 2.3 Matrix & Encoder Protection
 
-- **Series Resistors:** 100Ω (0402) on every matrix Row and Column GPIO line (8 lines total).
+- **Series Resistors:** 100Ω (0402) on every matrix Row and Column GPIO line (10 lines total).
 - **Encoder Phase Lines:** 100Ω series resistors on all four encoder phase GPIOs (47, 14, 22, 23).
 
 ### 2.4 Programming & Reset Logic
@@ -77,7 +77,7 @@
 ## 3. Board Layout Strategy
 
 - **Zone A (Rear):** USB-C connector, USBLC6-2SC6, PTC fuse, Power Switch, LDO.
-- **Zone B (Center):** ESP32-S3, IDC headers for ribbon cables.
+- **Zone B (Center):** ESP32-S3, IDC headers for ribbon cables (Two 14-pin 2×7 headers).
 - **Zone C (Front):** ES8388 Codec, TRRS jack, PRTR5V0U2X TVS devices.
 
 > **ESD placement rule:** USBLC6-2SC6 within 5mm of USB-C pins, before PTC fuse. PRTR5V0U2X between TRRS jack pads and first passive on each signal line.
@@ -89,7 +89,7 @@
 - **Analog Ground Island:** ES8388 AVDD and AGND on isolated copper island. Star-ground via 0Ω resistor near LDO.
 - **Encoder Interrupts:** Dedicated GPIOs with 100Ω series resistors. Not matrix-scanned.
 - **Ribbon Isolation:** SHIFT_KEY (Header B, Pin 9) kept distant from SPI_CLK (Header B, Pin 4).
-- **Boot Window:** GPIO 1 and GPIO 3 tri-stated during power-on strapping window.
+- **Boot Window:** GPIO 1 tri-stated during power-on strapping window. Matrix Col 1 moved to GPIO 15 (non-strapping) to eliminate boot interference.
 - **MCLK Boot Safety:** GPIO 0 MCLK output enabled only after ES8388 I2C init completes.
 - **Debug:** All logs via USB CDC. UART0 unavailable in production.
 
@@ -137,4 +137,13 @@
 | Ferrite Bead | BLM18 series 0402. 3.3V_D → 3.3V_A isolation. |
 | NPN Transistors ×2 | S8050. Auto-reset RTS/DTR circuit. |
 | Red LED | Power indicator on 3.3V rail. |
-| RGB LED | Activity/status on GPIO 48. |
+| RGB LED | Activity/status on GPIO 48. **Located on Plate PCB.** |
+
+### 5.5 Board-to-Board Interconnect
+
+| Component | Spec | Qty | Notes |
+|---|---|---|---|
+| IDC Box Header (PCB) | 2×7, 2.54mm pitch, shrouded, THT | 4 | 2 per board (Brain + Plate). |
+| IDC Crimp Socket (Cable) | 2×7, 2.54mm pitch, female | 4 | 2 per cable. |
+| Flat Ribbon Cable | 14-conductor, 28AWG | 2 | 1.27mm wire pitch. |
+

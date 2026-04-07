@@ -28,10 +28,12 @@
 #define PIN_MATRIX_ROW_1     2   /* Matrix Row 1 */
 #define PIN_MATRIX_ROW_2     42  /* Matrix Row 2 */
 #define PIN_MATRIX_ROW_3     43  /* Matrix Row 3 */
+#define PIN_MATRIX_ROW_4     25  /* Matrix Row 4 */
 #define PIN_MATRIX_COL_0     8   /* Matrix Col 0 */
-#define PIN_MATRIX_COL_1     3   /* Matrix Col 1 */
+#define PIN_MATRIX_COL_1     15  /* Matrix Col 1 (moved from GPIO 3 strapping pin) */
 #define PIN_MATRIX_COL_2     44  /* Matrix Col 2 */
 #define PIN_MATRIX_COL_3     9   /* Matrix Col 3 */
+#define PIN_MATRIX_COL_4     24  /* Matrix Col 4 */
 #define PIN_ENC1_A           47  /* Encoder 1 A (Bank switching) */
 #define PIN_ENC1_B           14  /* Encoder 1 B (Bank switching) */
 #define PIN_ENC2_A           22  /* Encoder 2 A (SD Gain) */
