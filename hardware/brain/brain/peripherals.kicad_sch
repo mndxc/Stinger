@@ -1,0 +1,98 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "355fa72a-b700-4e4c-a89c-c599663918e5")
+	(paper "USLetter")
+	(title_block
+		(title "Stinger — Brain PCB (Core Engine)")
+		(date "2026-04-07")
+		(rev "2.0")
+		(company "JP+ / mndxc")
+		(comment 1 "Assembly: Mixed Mode (LCSC Professional SMT)")
+		(comment 2 "MCU: ESP32-S3-WROOM-1-N8R8")
+		(comment 3 "License: GNU GPL v3.0")
+		(comment 4 "GitHub: github.com/mndxc/Stinger")
+	)
+	(lib_symbols)
+	(text_box "B2B Connection 2\n2x8 IDC\nMFG: 2.54-2*8P2.54 mm pitch 2×8 pin IDC box header\nLCSC: C3406"
+		(exclude_from_sim no)
+		(at 139.7 64.77 0)
+		(size 33.02 12.7)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "7901fead-42b2-49a2-9c56-2474b9348dda")
+	)
+	(text_box "SD card SPI lines\n4 x 10k pull ups\nCS, SCK, MOSI, MISO\n\nDecoupling power\n10uF near VCC"
+		(exclude_from_sim no)
+		(at 59.69 92.71 0)
+		(size 25.4 14.1714)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "9029a2cf-35b6-4781-b390-c145819edb97")
+	)
+	(text_box "Micro SD\nSpring ejector\nMFG: TF-01A\nLCSC: C91145\n\nSPI pull up resistors close to connector.\nSeries resistors close to mcu."
+		(exclude_from_sim no)
+		(at 50.8 64.77 0)
+		(size 24.13 20.3053)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "92518cf4-9d7a-4fa7-a4af-9a44e9f8ed47")
+	)
+	(text_box "B2B Connection 1\n2x8 IDC\nMFG: 2.54-2*8P2.54 mm pitch 2×8 pin IDC box header\nLCSC: C3406"
+		(exclude_from_sim no)
+		(at 95.25 64.77 0)
+		(size 33.02 12.7)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "cad74dfb-016a-489c-a7ef-80d5407ada14")
+	)
+)

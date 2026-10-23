@@ -1,0 +1,118 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "7affa75c-106d-4a54-9a20-1792027f1e3c")
+	(paper "USLetter")
+	(title_block
+		(title "Stinger — Brain PCB (Core Engine)")
+		(date "2026-04-07")
+		(rev "2.0")
+		(company "JP+ / mndxc")
+		(comment 1 "Assembly: Mixed Mode (LCSC Professional SMT)")
+		(comment 2 "MCU: ESP32-S3-WROOM-1-N8R8")
+		(comment 3 "License: GNU GPL v3.0")
+		(comment 4 "GitHub: github.com/mndxc/Stinger")
+	)
+	(lib_symbols)
+	(text_box "TVS/ESD\nPKG: SOT-23-6\nMFR: TPRCLAMP0524S\nLCSC: C19829510\nimmedietly after and in line with trrs jack "
+		(exclude_from_sim no)
+		(at 80.01 86.36 0)
+		(size 27.94 14.1714)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "0bdc5583-ca6c-4a69-b121-9e246dec4076")
+	)
+	(text_box "Signal conditioning\n\nDC blocking\n\nMic bias"
+		(exclude_from_sim no)
+		(at 179.07 77.47 0)
+		(size 36.83 18.2607)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "287d0989-250b-42ac-8c17-b8c9a0c625a8")
+	)
+	(text_box "ES8388 Codec\n\nPKG: QFN-28-EP(4x4)\nMFR:ES8388\nLCSC: C365736"
+		(exclude_from_sim no)
+		(at 45.72 55.88 0)
+		(size 27.94 12.1268)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "6deacede-3a4e-4eaa-bb60-6332691380b3")
+	)
+	(text_box "Ferrite bead\n\nMFG: \nLCSC: "
+		(exclude_from_sim no)
+		(at 88.9 55.88 0)
+		(size 20.32 10.16)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "941a30ac-9fd7-491b-a06b-6b5882f1214d")
+	)
+	(text_box "Capacitance\n\n2 x 10uF bulk \n\n4 x 100nF bypass"
+		(exclude_from_sim no)
+		(at 120.65 55.88 0)
+		(size 21.59 12.7)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "a204c98e-5c13-4f8a-8ac1-3ee8c89632d5")
+	)
+)

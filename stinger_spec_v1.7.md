@@ -322,7 +322,7 @@ FAT32 is not journaled. Power loss during Transfer Mode SD writes may cause file
 |---|---|---|---|
 | MCU Module | ESP32-S3-WROOM-1-N8R8 | C2913148 | |
 | Audio Codec | ES8388 | C365736 | QFN-28, 4×4mm |
-| LDO Regulator | SGM2019-3.3 | C16193 | 3.3V, 300mA |
+| LDO Regulator | AMS1117-3.3 | C6186 | 3.3V, 1A (SOT-223) |
 
 ### 9.2 Protection
 
@@ -464,3 +464,4 @@ stinger/
 | 1.5 | Codec replaced: WM8960 (EOL) → ES8388 (C365736). MCLK added to pin map. Encoder 1 assigned to bank switching. Display specification added. Label file format defined. 99-bank system defined. Project directory added. ESP-IDF v5.3 target defined. |
 | 1.6 | Full protection circuitry restored: VBUS PTC fuse (C17313), USB ESD (C7519), TRRS TVS (C12333 ×2), matrix 100Ω series resistors. SD card-detect added (GPIO 26). BOM rationalised to 8 passive values. FAT32 power-loss limitation documented. |
 | 1.7 | Project renamed to **Stinger** by JP+. Name applied throughout all sections and directory structure. USB descriptor strings defined: Manufacturer `JP+`, Product `Stinger`, UAC1 `Stinger Audio`, MSC volume `STINGER`. Serial number deferred to runtime MAC-derived ID. Boot splash screen specified (2s, STINGER / JP+ centered). USB strings added to `board_config.h` conventions. |
+| 1.8 | Updated 3.3V LDO to **AMS1117-3.3** (C6186) in SOT-223 package. Increased current capacity to 1A for improved stability. |

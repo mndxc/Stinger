@@ -33,7 +33,7 @@
     { "name": "PIN_ENC1_B",        "gpio": 14, "desc": "Encoder 1 B (Bank switching)" },
     { "name": "PIN_ENC2_A",        "gpio": 22, "desc": "Encoder 2 A (SD Gain)" },
     { "name": "PIN_ENC2_B",        "gpio": 23, "desc": "Encoder 2 B (SD Gain)" },
-    { "name": "PIN_SD_DETECT",     "gpio": 26, "desc": "SD Card Detect (Active low)" },
+    { "name": "PIN_SD_DETECT",     "gpio": 46, "desc": "SD Card Detect (Active low. Note: GPIO 46 is Input-Only)" },
     { "name": "PIN_STATUS_LED",    "gpio": 48, "desc": "Status RGB LED" }
   ]
 }

@@ -1,0 +1,18 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "1777d9d0-6c75-4bcf-a6e7-e69d33286be4")
+	(paper "USLetter")
+	(title_block
+		(title "Stinger — Brain PCB (Core Engine)")
+		(date "2026-04-07")
+		(rev "2.0")
+		(company "JP+ / mndxc")
+		(comment 1 "Assembly: Mixed Mode (LCSC Professional SMT)")
+		(comment 2 "MCU: ESP32-S3-WROOM-1-N16R8")
+		(comment 3 "License: GNU GPL v3.0")
+		(comment 4 "GitHub: github.com/mndxc/Stinger")
+	)
+	(lib_symbols)
+)

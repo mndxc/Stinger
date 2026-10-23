@@ -77,7 +77,7 @@ To prevent "split-brain" discrepancies between PCB schematics and firmware const
 | `PIN_ENC1_B` | GPIO 14 | Encoder 1 B (Bank switching) |
 | `PIN_ENC2_A` | GPIO 22 | Encoder 2 A (SD Gain) |
 | `PIN_ENC2_B` | GPIO 23 | Encoder 2 B (SD Gain) |
-| `PIN_SD_DETECT` | GPIO 26 | SD Card Detect (Active low) |
+| `PIN_SD_DETECT` | GPIO 46 | SD Card Detect (Active low. Note: GPIO 46 is Input-Only) |
 | `PIN_STATUS_LED` | GPIO 48 | Status RGB LED |
 <!-- PINS_END -->
 

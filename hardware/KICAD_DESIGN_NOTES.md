@@ -20,7 +20,7 @@ The Stinger is a **two-board design** optimized for a mix of professional and ma
 
 ---
 
-## 2. MCU Module — ESP32-S3-WROOM-1-N8R8
+## 2. MCU Module — ESP32-S3-WROOM-1-N16R8
 
 ### 2.1 Strapping Pins — Critical at Power-On
 These pins determine the boot mode. Ensure the Brain PCB includes these 10kΩ pull-up/down resistors for the SMT machine to place.
@@ -70,7 +70,7 @@ These pins determine the boot mode. Ensure the Brain PCB includes these 10kΩ pu
 
 ## 5. Power & Supply Rails
 
-- **LDO:** SGM2019-3.3 (Brain). Output `3.3V_D`.
+- **LDO:** AMS1117-3.3 (Brain). Output `3.3V_D`. **Footprint:** SOT-223.
 - **Analog Island:** ES8388 `AVDD/AGND` isolated via ferrite bead and 10µF cap on the Brain.
 - **Star-Ground:** Connect AGND to main GND at a single point near the LDO on the Brain.
 
@@ -86,9 +86,9 @@ These pins determine the boot mode. Ensure the Brain PCB includes these 10kΩ pu
 
 ## 7. Board-to-Board Interconnect (IDC)
 
-- **Headers:** Two **14-pin (2×7)** 2.54mm pitch shrouded headers.
-- **Cable:** Standard 14-way flat ribbon.
-- **Signal Integrity:** Use the 5 spare/GND pins on the headers to interleave ground between `EPD_CLK` and sensitive data lines like `SD_CS`.
+- **Headers:** Two **16-pin (2×8)** 2.54mm pitch shrouded headers.
+- **Cable:** Standard 16-way flat ribbon (2.54mm).
+- **Signal Integrity:** Use the 13 ground pins across the headers to interleave ground between `EPD_CLK` and sensitive data lines like `SD_CS`.
 
 ---
 
@@ -100,6 +100,13 @@ These pins determine the boot mode. Ensure the Brain PCB includes these 10kΩ pu
 - [ ] Plate PCB pads for E-paper and IDC are through-hole for easy wiring.
 - [ ] Pin map matches the root `SPEC.md` and `master_pins.json`.
 - [ ] Analog ground island on Brain is isolated and star-grounded.
+
+---
+
+## 9. Hardware Gotchas & Future Reference
+
+- **GP46 (SD_DETECT):** GPIO 46 is an **Input-Only** pin on the ESP32-S3. It has been used for the SD Card Detect switch. Do not attempt to reassign it to an output function (like an LED or PWM) in future revisions.
+- **N16R8 Reserved Pins:** GPIO 26 through 37 are internally used for the Octal Flash/PSRAM interface and must not be routed to any external headers or components.
 
 ---
 

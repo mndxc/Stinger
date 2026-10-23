@@ -1,0 +1,118 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "86b80fbe-4d77-429b-923e-f0c17d54b968")
+	(paper "USLetter")
+	(title_block
+		(title "Stinger — Brain PCB (Core Engine)")
+		(date "2026-04-07")
+		(rev "2.0")
+		(company "JP+ / mndxc")
+		(comment 1 "Assembly: Mixed Mode (LCSC Professional SMT)")
+		(comment 2 "MCU: ESP32-S3-WROOM-1-N8R8")
+		(comment 3 "License: GNU GPL v3.0")
+		(comment 4 "GitHub: github.com/mndxc/Stinger")
+	)
+	(lib_symbols)
+	(text_box "USB-C connector\n16 pin \nVBUS + USB 2.0\nMFG: TYPE-C-31-M-12\nLCSC: C165948"
+		(exclude_from_sim no)
+		(at 25.4 38.1 0)
+		(size 27.94 12.1268)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "15b43c59-a99a-4378-89e9-f4a97face57f")
+	)
+	(text_box "USB-C Pin(s)		Connection			Purpose\n\nA1, A12, B1, B12	GND					System Ground\nA4, A9, B4, B9		FUSE_IN (+5V)		Main Power Input\nA5 (CC1)			5.1k Resistor → GND	Mode Detection (Sink)\nB5 (CC2)			5.1k Resistor → GND	Mode Detection (Sink)\nA6, B6 (D+)			ESD → ESP32 GPIO	USB Data (Positive)\nA7, B7 (D-)			ESD → ESP32 GPIO	USB Data (Negative)\nA8, B8 (SBU)		NC					Not Used"
+		(exclude_from_sim no)
+		(at 19.05 104.14 0)
+		(size 85.09 20.3053)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "4dc9aaf7-702b-425e-bc5d-5467e8c1b90e")
+	)
+	(text_box "3V3 Regulator\n1A, min 1V drop\nPKG: SOT-223\nMFG: AMS1117-3.3\nLCSC: C6186\n\nStability\nInput 10uF near IC\nOutput 22uF Tantalum"
+		(exclude_from_sim no)
+		(at 115.57 38.1147 0)
+		(size 26.67 20.3053)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "a4bffb08-b7bd-4411-b000-3620d94a883e")
+	)
+	(text_box "PTC Polyfuse\n15V, 500mA, 1A trip\nPKG: 1812\nMFG: MF-MSMF050-2\nLCSC: C17313\nAfter ESD/TVS"
+		(exclude_from_sim no)
+		(at 85.09 38.1 0)
+		(size 25.4 14.1714)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "b26760e8-6660-4fdd-a003-567ba76d152d")
+	)
+	(text_box "ESD/TVS\nProtects 2 Data + VBus \nPKG: SOT-23-6L\nMFG: USBLC6-2SC6\nLCSC: C7519\nAs close as possible to USB Connector"
+		(exclude_from_sim no)
+		(at 55.88 38.1 0)
+		(size 26.67 16.2161)
+		(margins 0.9525 0.9525 0.9525 0.9525)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(type none)
+		)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "d36bb898-f131-49c6-a969-2390f995079a")
+	)
+)
